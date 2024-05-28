@@ -101,7 +101,7 @@ def update_liker(liker_id):
     db.session.commit()
     return jsonify({"message": "Liker updated successfully"})
 
-@app.route('/liker/<int:liker_id>', methods['DELETE'])
+@app.route('/liker/<int:liker_id>', methods=['DELETE'])
 def delete_liker(liker_id):
     liker = LinkedInLiker.query.get(liker_id)
     if not liker:
