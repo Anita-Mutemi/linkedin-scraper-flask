@@ -101,7 +101,7 @@ def update_liker(liker_id):
     db.session.commit()
     return jsonify({"message": "Liker updated successfully"})
 
-@app.route('/liker/<int:liker_id>', methods=['DELETE'])
+@app.route('/liker/<int:liker_id>', methods['DELETE'])
 def delete_liker(liker_id):
     liker = LinkedInLiker.query.get(liker_id)
     if not liker:
@@ -119,6 +119,33 @@ def get_likers_by_user(linkedin_id):
 
     likers = LinkedInLiker.query.filter_by(linkedin_user_id=linkedin_id).all()
     return jsonify([liker.to_dict() for liker in likers])
+
+@app.route('/bulk_delete_users', methods=['DELETE'])
+def bulk_delete_users():
+    data = request.get_json()
+    linkedin_ids = data.get('linkedin_ids', [])
+
+    for linkedin_id in linkedin_ids:
+        user = LinkedInUser.query.filter_by(linkedin_id=linkedin_id).first()
+        if user:
+            LinkedInLiker.query.filter_by(linkedin_user_id=linkedin_id).delete()
+            db.session.delete(user)
+
+    db.session.commit()
+    return jsonify({"message": "Users deleted successfully"})
+
+@app.route('/bulk_delete_likers', methods=['DELETE'])
+def bulk_delete_likers():
+    data = request.get_json()
+    liker_ids = data.get('liker_ids', [])
+
+    for liker_id in liker_ids:
+        liker = LinkedInLiker.query.get(liker_id)
+        if liker:
+            db.session.delete(liker)
+
+    db.session.commit()
+    return jsonify({"message": "Likers deleted successfully"})
 
 if __name__ == '__main__':
     app.run(debug=True)
