@@ -8,6 +8,7 @@ class LinkedInUser(db.Model):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "name": self.name,
             "linkedin_id": self.linkedin_id,
             "title": self.title
@@ -23,6 +24,7 @@ class LinkedInLiker(db.Model):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "linkedin_user_id": self.linkedin_user_id,
             "liker_user_name": self.liker_user_name,
             "liker_user_id": self.liker_user_id,
