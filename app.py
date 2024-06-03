@@ -148,4 +148,4 @@ def bulk_delete_likers():
     return jsonify({"message": "Likers deleted successfully"})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
