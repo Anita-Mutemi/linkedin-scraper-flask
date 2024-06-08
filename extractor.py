@@ -15,8 +15,8 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--log-level=3")  # Suppress console logs
 
 # LinkedIn Credentials
-email = "anitajehu13@gmail.com"
-password = "0714676921akm"
+email = "anitajehu12@gmail.com"
+password = "0714676921Akm."
 
 # URL of the LinkedIn Page you want to scrape
 
